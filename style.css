@@ -1,0 +1,1112 @@
+/* =========================================
+   1. GLOBAL SETTINGS & VARIABLES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    /* --- DARK THEME (DEFAULT) --- */
+    --bg-color: #0f172a;       
+    --body-bg: linear-gradient(to right bottom, #0f172a, #1e293b, #0f172a);
+    
+    /* Glass Effect */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-backdrop: blur(15px);
+    
+    /* Text Colors */
+    --text-main: #ffffff;      
+    --text-para: #94a3b8;      
+    
+    /* Brand Colors */
+    --main-color: #38bdf8;     
+    --accent-color: #818cf8;   
+    --gradient-text: linear-gradient(90deg, #38bdf8, #818cf8);
+    
+    /* Misc */
+    --card-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    --transition: all 0.4s ease-in-out;
+}
+
+/* --- LIGHT THEME OVERRIDES --- */
+.light-mode {
+    --bg-color: #f8fafc;
+    --body-bg: linear-gradient(to right bottom, #f1f5f9, #e2e8f0, #f1f5f9);
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    
+    --text-main: #1e293b;
+    --text-para: #475569;
+    
+    --main-color: #0284c7;
+    --accent-color: #4f46e5;
+    --gradient-text: linear-gradient(90deg, #0284c7, #4f46e5);
+    
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* --- RESET & BASIC SETUP --- */
+* {
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none; list-style: none;
+    border: none; outline: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--body-bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease;
+    /* Cursor: none removed - Default cursor restored */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-color); }
+::-webkit-scrollbar-thumb { background: var(--main-color); border-radius: 5px; }
+
+
+/* --- THEME TOGGLE BUTTON --- */
+#theme-toggle {
+    position: fixed;
+    top: 100px; 
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: var(--transition);
+}
+
+#theme-toggle:hover {
+    background: var(--main-color);
+    color: #fff;
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* --- SECTIONS --- */
+section {
+    padding: 100px 9%;
+    overflow: hidden; 
+}
+
+.center-text { text-align: center; margin-bottom: 60px; }
+.section-title { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); }
+
+.section-title span {
+    background: var(--gradient-text);
+    background-clip: text; -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* --- HEADER --- */
+.header {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 20px 9%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(15px);
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
+}
+.light-mode .header { background: rgba(255, 255, 255, 0.85); }
+
+.logo { font-size: 1.8rem; font-weight: 800; color: var(--text-main); letter-spacing: 1px; }
+.logo span { color: var(--main-color); }
+
+.navbar { display: flex; align-items: center; gap: 30px; }
+.navbar a { font-size: 1rem; color: var(--text-para); font-weight: 500; transition: var(--transition); position: relative; }
+.navbar a:hover, .navbar a.active { color: var(--main-color); }
+.navbar a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--main-color); transition: var(--transition); }
+.navbar a:hover::after, .navbar a.active::after { width: 100%; }
+
+.btn-hire {
+    padding: 10px 25px; background: var(--gradient-text); color: #fff !important;
+    border-radius: 50px; font-weight: 600; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+}
+.btn-hire:hover { transform: scale(1.05); }
+
+.menu-icon { font-size: 2.5rem; color: var(--text-main); display: none; cursor: pointer; }
+
+/* =========================================
+   HERO SECTION (NO IMAGE - TYPOGRAPHY FOCUSED)
+   ========================================= */
+.hero-section { 
+    min-height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+    background: var(--body-bg);
+}
+
+/* 1. FLOATING CODE BACKGROUND */
+.tech-background {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.tech-background span {
+    position: absolute;
+    color: var(--main-color);
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    opacity: 0.15;
+    user-select: none;
+    animation: floatCode 15s linear infinite;
+    bottom: -100px;
+}
+/* Random positions for floating text */
+.tech-background span:nth-child(1) { left: 10%; animation-duration: 10s; font-size: 2rem; }
+.tech-background span:nth-child(2) { left: 20%; animation-duration: 14s; font-size: 1.2rem; }
+.tech-background span:nth-child(3) { left: 35%; animation-duration: 18s; font-size: 2.5rem; opacity: 0.08; }
+.tech-background span:nth-child(4) { left: 50%; animation-duration: 9s; font-size: 1.5rem; }
+.tech-background span:nth-child(5) { left: 65%; animation-duration: 20s; font-size: 1.8rem; }
+.tech-background span:nth-child(6) { left: 75%; animation-duration: 12s; font-size: 3rem; opacity: 0.05; }
+.tech-background span:nth-child(7) { left: 85%; animation-duration: 15s; font-size: 1.5rem; }
+.tech-background span:nth-child(8) { left: 95%; animation-duration: 11s; font-size: 1.2rem; }
+.tech-background span:nth-child(9) { left: 5%; animation-duration: 16s; font-size: 2rem; }
+.tech-background span:nth-child(10) { left: 55%; animation-duration: 13s; font-size: 1.8rem; }
+
+@keyframes floatCode {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+/* 2. HEXAGONS (Decorations) */
+.hero-section::before {
+    content: ''; position: absolute; width: 350px; height: 350px;
+    background: var(--main-color);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    top: -50px; left: -80px; opacity: 0.15; z-index: 0; 
+    animation: hexMove1 10s linear infinite;
+}
+
+.hero-section::after {
+    content: ''; position: absolute; width: 400px; height: 400px;
+    background: var(--accent-color);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    bottom: -50px; right: -80px; opacity: 0.15; z-index: 0;
+    animation: hexMove2 12s linear infinite;
+}
+
+@keyframes hexMove1 { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(30px) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
+@keyframes hexMove2 { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-40px) rotate(-180deg); } 100% { transform: translateY(0) rotate(-360deg); } }
+
+/* 3. MAIN HERO CONTENT (CENTERED) */
+.hero-container { 
+    display: flex; 
+    flex-direction: column; /* Stack vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    text-align: center; /* Text alignment */
+    width: 100%; 
+    position: relative; 
+    z-index: 2; 
+}
+
+.hero-content { 
+    max-width: 900px; /* Wider text area */
+    margin: 0 auto;
+}
+
+/* 4. TYPOGRAPHY */
+.greeting { 
+    font-size: 1.2rem; font-weight: 600; color: var(--main-color); 
+    letter-spacing: 2px; text-transform: uppercase; 
+    display: block; margin-bottom: 10px; 
+}
+
+.hero-name { 
+    position: relative; z-index: 2; 
+    font-size: 5rem; /* Increased size since image is gone */
+    font-weight: 800; line-height: 1.1; 
+    margin-bottom: 15px; color: var(--text-main); 
+}
+
+.glitch {
+    position: relative; color: var(--main-color); display: inline-block;
+}
+.glitch::before, .glitch::after {
+    content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color);
+}
+.glitch::before { left: 2px; text-shadow: -1px 0 red; clip: rect(24px, 550px, 90px, 0); animation: glitch-anim-2 3s infinite linear alternate-reverse; }
+.glitch::after { left: -2px; text-shadow: -1px 0 blue; clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse; }
+
+@keyframes glitch-anim { 0% { clip: rect(14px, 9999px, 129px, 0); } 100% { clip: rect(60px, 9999px, 90px, 0); } }
+@keyframes glitch-anim-2 { 0% { clip: rect(120px, 9999px, 10px, 0); } 100% { clip: rect(84px, 9999px, 79px, 0); } }
+
+.hero-tagline { font-size: 1.8rem; font-weight: 600; color: var(--text-para); margin-bottom: 20px; position: relative; z-index: 2; }
+.typing-text { color: var(--accent-color); position: relative; }
+.typing-text::after { content: ""; position: absolute; right: -5px; top: 5%; width: 3px; height: 90%; background: var(--text-main); animation: blink 0.7s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.hero-description { font-size: 1.3rem; color: var(--text-para); line-height: 1.8; margin-bottom: 40px; position: relative; z-index: 2; }
+@media (max-width: 768px) {
+    .hero-description {
+        font-size: 1.1rem; 
+        padding: 0 15px; 
+    }
+}
+/* 5. BUTTONS & SOCIAL (CENTERED) */
+.hero-social { 
+    margin-bottom: 30px; 
+    display: flex; 
+    justify-content: center; /* Center icons */
+    align-items: center; 
+    gap: 15px; position: relative; z-index: 2; 
+}
+
+.hero-social span { color: var(--text-main); font-weight: 600; margin-right: 10px; }
+.hero-social a {
+    display: inline-flex; justify-content: center; align-items: center;
+    width: 40px; height: 40px; background: var(--glass-bg);
+    border: 1px solid var(--glass-border); border-radius: 50%;
+    color: var(--main-color); font-size: 1.2rem; transition: var(--transition);
+}
+.hero-social a:hover { background: var(--main-color); color: #fff; transform: translateY(-5px); }
+
+.hero-buttons { 
+    display: flex; 
+    justify-content: center; /* Center buttons */
+    gap: 20px; position: relative; z-index: 2; 
+}
+
+.btn { padding: 12px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: var(--transition); }
+.btn-primary { background: var(--gradient-text); color: #fff; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+.btn-primary:hover { transform: translateY(-3px); }
+.btn-secondary { background: transparent; border: 2px solid var(--main-color); color: var(--text-main); }
+.btn-secondary:hover { background: var(--main-color); color: #fff; }
+
+/* 6. HIDE HERO IMAGE */
+.hero-image {
+    display: none !important;
+}
+
+/* --- STATS --- */
+.stats-section { padding: 40px 9%; background: var(--glass-bg); border-top: 1px solid var(--glass-border); border-bottom: 1px solid var(--glass-border); }
+.stats-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.stat-item { text-align: center; flex: 1; }
+.stat-item h2 { font-size: 3rem; font-weight: 800; color: var(--main-color); }
+.stat-item p { color: var(--text-para); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+
+/* --- ABOUT --- */
+.about-section { background: rgba(0,0,0,0.2); }
+.light-mode .about-section { background: #ffffff; }
+
+.about-container { display: flex; justify-content: center; align-items: center; gap: 4rem; }
+.about-image img { width: 400px; border-radius: 20px; box-shadow: var(--card-shadow); }
+.sub-title { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 1rem; }
+.about-text p { color: var(--text-para); line-height: 1.8; margin-bottom: 1.5rem; }
+.about-features li { margin-bottom: 10px; font-size: 1rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+.about-features i { color: var(--main-color); font-size: 1.2rem; }
+
+/* Fixed Read More Button Gap */
+.about-text .btn { margin-top: 30px; display: inline-block; }
+
+/* --- SERVICES & WORK PROCESS GRID --- */
+.services-grid, .process-container, .portfolio-grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+.service-card, .process-box, .info-item {
+    background: var(--glass-bg); backdrop-filter: blur(10px);
+    padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border);
+    transition: var(--transition); text-align: center; position: relative; overflow: hidden;
+    box-shadow: var(--card-shadow);
+}
+.service-card:hover, .process-box:hover, .info-item:hover { transform: translateY(-10px); border-color: var(--main-color); }
+.service-card .icon, .info-item i { font-size: 3.5rem; color: var(--main-color); margin-bottom: 20px; }
+.service-card h3, .process-box h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--text-main); }
+.service-card p, .process-box p { color: var(--text-para); font-size: 0.95rem; line-height: 1.6; }
+
+/* PROCESS NUMBER COLOR */
+.process-box span { 
+    font-size: 3rem; 
+    font-weight: 800; 
+    color: var(--main-color); 
+    opacity: 0.7; 
+    position: absolute; 
+    top: 10px; 
+    right: 20px; 
+}
+
+/* --- PORTFOLIO --- */
+.portfolio-item { position: relative; border-radius: 20px; overflow: hidden; height: 280px; box-shadow: var(--card-shadow); }
+.portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.portfolio-item:hover img { transform: scale(1.1); }
+.portfolio-overlay {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95), transparent);
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    padding-bottom: 30px; transform: translateY(100px); opacity: 0; transition: var(--transition);
+}
+.light-mode .portfolio-overlay { background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent); }
+.portfolio-item:hover .portfolio-overlay { transform: translateY(0); opacity: 1; }
+.portfolio-overlay h3 { font-size: 1.5rem; color: #fff; }
+.light-mode .portfolio-overlay h3 { color: #000; }
+.portfolio-overlay p { color: var(--main-color); margin-bottom: 10px; }
+.portfolio-overlay a { width: 45px; height: 45px; background: #fff; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #000; }
+
+/* --- CONTACT --- */
+.contact-container { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
+.contact-form input, .contact-form textarea {
+    width: 100%; padding: 18px; background: var(--glass-bg);
+    border: 1px solid var(--glass-border); border-radius: 10px; color: var(--text-main);
+    font-size: 1rem; margin-bottom: 20px; transition: var(--transition);
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--main-color); background: rgba(0,0,0,0.2); }
+.light-mode .contact-form input:focus { background: rgba(255,255,255,0.8); }
+.btn-submit { width: 100%; padding: 15px; background: var(--gradient-text); border-radius: 10px; color: #fff; font-weight: 700; cursor: pointer; }
+
+/* --- FOOTER --- */
+.footer { background: #0b1120; padding-top: 80px; border-top: 1px solid #1e293b; color: #fff; }
+.footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding: 0 9% 40px; }
+.footer-logo { font-size: 2rem; font-weight: 800; color: #fff; display: block; margin-bottom: 15px; }
+.footer-logo span { color: var(--main-color); }
+.footer-desc, .footer-bottom { color: #94a3b8; }
+.footer-col h3 { color: #fff; margin-bottom: 20px; font-size: 1.5rem; }
+
+/* Footer List Alignment */
+.footer-col ul { padding: 0; margin: 0; }
+.footer-col ul li { margin-bottom: 15px; } 
+.footer-col ul li a { display: block; font-size: 1rem; color: #94a3b8; transition: var(--transition); }
+.footer-col ul li a:hover { padding-left: 8px; color: var(--main-color); }
+
+/* Social Icons Gap */
+.social-links { margin-top: 25px; }
+.social-links a { width: 40px; height: 40px; background: #1e293b; color: #fff; display: inline-flex; justify-content: center; align-items: center; border-radius: 50%; margin-right: 10px; }
+.social-links a:hover { background: var(--main-color); }
+
+/* Newsletter Button Alignment */
+.newsletter-form { display: flex; gap: 10px; align-items: center; }
+.newsletter-form input { width: auto; flex: 1; padding: 12px; border-radius: 5px; background: #1e293b; color: #fff; border: none; }
+.newsletter-form button { background: var(--main-color); color: #fff; padding: 12px 20px; border-radius: 5px; cursor: pointer; white-space: nowrap; }
+
+.footer-bottom { padding: 20px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); color: #94a3b8; }
+
+/* =========================================
+   ANIMATIONS (SERVICES & WORK PROCESS)
+   ========================================= */
+
+/* 1. Default Hidden State for Both */
+.service-card, .process-box { opacity: 0; filter: blur(5px); }
+
+/* 2. SERVICES ANIMATION (Faster) */
+.service-card { transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.service-card:nth-child(odd) { transform: translateX(-150px); }
+.service-card:nth-child(even) { transform: translateX(150px); }
+
+.show-animate .service-card { opacity: 1; transform: translateX(0); filter: blur(0); }
+
+.show-animate .service-card:nth-child(1) { transition-delay: 0.1s; }
+.show-animate .service-card:nth-child(2) { transition-delay: 0.2s; }
+.show-animate .service-card:nth-child(3) { transition-delay: 0.3s; }
+.show-animate .service-card:nth-child(4) { transition-delay: 0.4s; }
+.show-animate .service-card:nth-child(5) { transition-delay: 0.5s; }
+.show-animate .service-card:nth-child(6) { transition-delay: 0.6s; }
+
+
+/* 3. WORK PROCESS ANIMATION (Slower & Bigger Delays) */
+.process-box { transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); } 
+.process-box:nth-child(odd) { transform: translateX(-150px); }
+.process-box:nth-child(even) { transform: translateX(150px); }
+
+.show-animate .process-box { opacity: 1; transform: translateX(0); filter: blur(0); }
+
+.show-animate .process-box:nth-child(1) { transition-delay: 0.2s; }
+.show-animate .process-box:nth-child(2) { transition-delay: 0.5s; }
+.show-animate .process-box:nth-child(3) { transition-delay: 0.8s; }
+.show-animate .process-box:nth-child(4) { transition-delay: 1.1s; }
+
+.services-section, .process-section { overflow-x: hidden; }
+
+/* [CUSTOM CURSOR REMOVED HERE] */
+
+/* --- RESPONSIVE --- */
+@media (max-width: 991px) { .header, section, .footer-container { padding-left: 4%; padding-right: 4%; } }
+@media (max-width: 768px) {
+    .menu-icon { display: block; }
+    .navbar { position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-color); padding: 1rem 4%; display: none; flex-direction: column; border-top: 1px solid var(--glass-border); }
+    .navbar.active { display: flex; }
+    
+    /* MODIFIED: Mobile Layouts */
+    .hero-container { text-align: center; }
+    .hero-name { font-size: 3rem; } /* Smaller text on mobile */
+    
+    /* About Section Ordering (Text Top, Image Bottom) */
+    .about-container { flex-direction: column-reverse; text-align: center; }
+
+    .contact-container { grid-template-columns: 1fr; }
+    #theme-toggle { top: 90px; right: 20px; width: 40px; height: 40px; font-size: 1.2rem; }
+    .footer-col { text-align: center; }
+    .newsletter-form { flex-direction: row; } 
+    .social-links { justify-content: center; }
+}
+
+/* =========================================
+   OPTION 1: MODERN GRADIENT FADE LOOP
+   ========================================= */
+.scrolling-loop {
+    width: 100%;
+    background: transparent; /* Solid background khatam */
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 10;
+    margin-top: 20px;
+    margin-bottom: 60px;
+    /* Halkay borders ooper neechay */
+    border-top: 1px solid rgba(56, 189, 248, 0.1);
+    border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+    
+    /* ✨ Jaadu: Kinaron ko fade karne ke liye mask */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.loop-track {
+    display: inline-block;
+    animation: scrollLoop 25s linear infinite; /* Speed thori slow ki hai smooth look ke liye */
+}
+
+.loop-track span {
+    font-size: 1.8rem; /* Size thora bara kiya */
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-right: 30px; /* Items ke beech gap */
+    letter-spacing: 1px;
+    
+    /* ✨ Text ko Gradient banana */
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes scrollLoop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .loop-track span { font-size: 1.2rem; }
+}
+
+/* =========================================
+   REVERSE SCROLL UTILITY
+   ========================================= */
+.reverse-scroll {
+    animation-direction: reverse; /* Yeh magic hai jo isay ulta chalaye ga */
+}
+
+/* Optional: Agar aap chahte hain iska rang thora alag ho taake monotonous na lage */
+.reverse-scroll span {
+    color: var(--text-para); /* Thora soft color (Grey/Silver) */
+    /* Agar pehle wala design Outline tha, to yahan wapis Solid color acha lagega */
+    -webkit-text-stroke: 0; 
+}
+
+/* TESTIMONIALS */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.review-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.review-card:hover {
+    border-color: var(--main-color);
+    transform: translateY(-5px);
+}
+
+.stars { margin-bottom: 15px; font-size: 1.2rem; }
+.review-card p { font-style: italic; color: var(--text-para); margin-bottom: 20px; }
+.review-card h4 { color: var(--text-main); margin-bottom: 5px; }
+.review-card span { color: var(--main-color); font-size: 0.9rem; }
+
+/* FLOATING WHATSAPP */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25d366; /* WhatsApp Green */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    background: #20ba5a;
+}
+
+/* Animation taake nazar mein aaye */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* =========================================
+   TECH STACK (CLOUD STYLE)
+   ========================================= */
+.tech-container {
+    display: flex;
+    flex-wrap: wrap; /* Items ko agli line mein bhejta hai */
+    justify-content: center; /* Center mein rakhta hai */
+    gap: 15px; /* Items ke beech faasla */
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tech-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 12px 25px;
+    border-radius: 50px; /* Gol Pill Shape */
+    color: var(--text-para);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: default;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Icon aur Text ke beech gap */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.tech-item i {
+    color: var(--main-color);
+    font-size: 1.2rem;
+}
+
+/* Hover Effect: Jab mouse upar aye */
+.tech-item:hover {
+    background: var(--main-color);
+    color: #fff;
+    transform: translateY(-5px); /* Thora ooper uthay */
+    border-color: var(--main-color);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+}
+
+.tech-item:hover i {
+    color: #fff; /* Icon bhi white ho jaye */
+}
+
+/* Mobile par thora chota size */
+@media (max-width: 768px) {
+    .tech-item {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* =========================================
+   BLOG SECTION DESIGN
+   ========================================= */
+.blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Auto adjust columns */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.blog-card {
+    background: var(--glass-bg); /* Glass Effect */
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Hover Effect: Card ooper uthay ga */
+.blog-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--main-color);
+}
+
+/* Image Area */
+.blog-img {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover par image zoom hogi */
+.blog-card:hover .blog-img img {
+    transform: scale(1.1);
+}
+
+/* Category Badge (SEO, Tech, etc.) */
+.category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--main-color);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Content Area */
+.blog-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.date {
+    color: var(--text-para);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.blog-content h3 {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    line-height: 1.4;
+    transition: color 0.3s;
+}
+
+.blog-content h3:hover {
+    color: var(--main-color);
+}
+
+.blog-content p {
+    color: var(--text-para);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Read More Button Styling */
+.read-more {
+    margin-top: auto;
+    color: var(--main-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.read-more:hover {
+    color: var(--accent-color);
+    gap: 10px; /* Arrow move karega */
+}
+
+/* =========================================
+   SINGLE ARTICLE PAGE STYLING
+   ========================================= */
+.article-section {
+    padding-top: 150px; /* Header ke neeche jagah */
+    padding-bottom: 80px;
+}
+
+.article-container {
+    max-width: 800px; /* Reading ke liye width thori kam rakhi hai */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Back Button Styling */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--main-color);
+    font-weight: 600;
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+    text-decoration: none;
+}
+.back-btn:hover { transform: translateX(-5px); }
+
+/* Header & Meta Styling */
+.article-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-main);
+    margin: 15px 0;
+    line-height: 1.2;
+}
+
+.category-tag {
+    background: var(--glass-bg);
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.meta-info {
+    color: var(--text-para);
+    font-size: 0.9rem;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* Featured Image Styling */
+.article-image img {
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--glass-border);
+}
+
+/* Typography (Reading Content) */
+.article-body p {
+    color: var(--text-para);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+}
+
+.article-body h2, .article-body h3 {
+    color: var(--text-main);
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.article-body .lead {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    font-weight: 500;
+    border-left: 4px solid var(--main-color);
+    padding-left: 20px;
+}
+
+/* Quote Box Styling */
+blockquote {
+    background: var(--glass-bg);
+    border-left: 5px solid var(--accent-color);
+    margin: 30px 0;
+    padding: 20px;
+    font-style: italic;
+    color: var(--text-main);
+    font-size: 1.2rem;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .article-header h1 { font-size: 1.8rem; }
+    .article-body p { font-size: 1rem; }
+}
+/* BACK TO TOP BUTTON */
+.to-top {
+    background: var(--main-color);
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* Whatsapp button se thora door */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    opacity: 0; /* Shuru mein gayab */
+    pointer-events: none;
+    transition: all 0.4s;
+    z-index: 999; /* Whatsapp button se neeche */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.to-top.active {
+    bottom: 100px; /* Whatsapp button ke upar aye ga */
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.to-top:hover {
+    transform: translateY(-5px);
+    background: var(--accent-color);
+}
+/* =========================================
+   ANIMATED SKILL BARS
+   ========================================= */
+.skills-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 Columns Layout */
+    gap: 40px;
+}
+
+@media (max-width: 768px) {
+    .skills-container {
+        grid-template-columns: 1fr; /* Mobile par 1 Column */
+    }
+}
+
+.skill-box {
+    width: 100%;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.skill-info p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Gray Background Line */
+.skill-line {
+    width: 100%;
+    height: 10px;
+    background: var(--glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Colored Filling Line */
+.skill-line span {
+    display: block;
+    height: 100%;
+    background: var(--gradient-text); /* Blue/Purple Gradient */
+    border-radius: 20px;
+    width: 0; /* Shuru mein 0 hogi */
+    transition: width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    box-shadow: 0 0 10px var(--main-color);
+}
+
+/* Animation Trigger Class (JS se connect hoga) */
+.show-animate .skill-line span {
+    width: var(--target-width); /* JS se value uthaye ga */
+}
+/* =========================================
+   SCROLL PROGRESS BAR
+   ========================================= */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%; /* Shuru mein 0 hoga */
+    height: 4px; /* Bar ki motai */
+    background: var(--gradient-text); /* Aap ki theme ka color */
+    z-index: 1002; /* Header (1000) se upar */
+    box-shadow: 0 0 10px var(--main-color); /* Thora glow effect */
+    transition: width 0.1s; /* Smooth movement */
+}
+#particles-js {
+    position: fixed; /* Poori screen par rahega */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Isse ye content ke peeche chala jayega */
+    background-color: var(--bg-color); /* Aapki site ka dark background */
+}
+/* =========================================
+   GLASSMORPHISM & GLOWING BORDERS
+   ========================================= */
+.service-card, .process-box, .blog-card, .review-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px); /* Piche wala hissa dhundla hoga */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Barik transparent border */
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+/* Mouse lane par Card ka Glow effect */
+.service-card:hover, .process-box:hover, .blog-card:hover {
+    border-color: var(--main-color);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2), 
+                inset 0 0 10px rgba(56, 189, 248, 0.1);
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* ✨ Magic: Glowing Light jo border par ghome gi (Optional Decoration) */
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+/* In teeno sections par mouse-glow light nazar aaye gi */
+.service-card, .process-box, .blog-card {
+    position: relative;
+    overflow: hidden;
+    /* Background light settings */
+    background: radial-gradient(
+        600px circle at var(--mouse-x) var(--mouse-y),
+        rgba(56, 189, 248, 0.15),
+        transparent 40%
+    );
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover par border thora mazeed bright ho jaye */
+.service-card:hover, .process-box:hover, .blog-card:hover {
+    border-color: var(--main-color);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
+}
+/* =========================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================= */
+
+/* 1. Default State (Chupi hui) */
+.service-card, .process-box, .stat-item, .blog-card, .portfolio-item {
+    opacity: 0;
+    filter: blur(5px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); /* Professional Smooth Curve */
+}
+
+/* Side entries */
+.service-card:nth-child(odd), .process-box:nth-child(odd) {
+    transform: translateX(-50px);
+}
+
+.service-card:nth-child(even), .process-box:nth-child(even) {
+    transform: translateX(50px);
+}
+
+.stat-item, .blog-card, .portfolio-item {
+    transform: translateY(50px);
+}
+
+/* 2. Active State (Jab samne aayein) */
+.show-animate .service-card, 
+.show-animate .process-box, 
+.show-animate .stat-item, 
+.show-animate .blog-card, 
+.show-animate .portfolio-item {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(0);
+}
+
+/* 3. Staggered Delay (Aik ke baad aik aana) */
+.show-animate .service-card:nth-child(2), 
+.show-animate .process-box:nth-child(2),
+.show-animate .blog-card:nth-child(2) { transition-delay: 0.2s; }
+
+.show-animate .service-card:nth-child(3), 
+.show-animate .process-box:nth-child(3),
+.show-animate .blog-card:nth-child(3) { transition-delay: 0.4s; }
+/* =========================================
+   WEBSITE PRELOADER STYLING
+   ========================================= */
+#preloader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #0f172a; /* Aap ka dark theme color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Sab se oopar */
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader-content {
+    text-align: center;
+    color: #38bdf8;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(56, 189, 248, 0.1);
+    border-top: 5px solid #38bdf8;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
