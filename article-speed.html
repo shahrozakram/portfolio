@@ -3,12 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5 Reasons Your Website is Slow - Shahroz Blog</title>
     
+    <title>5 Reasons Your Website is Slow & How to Fix It - Shahroz Blog</title>
+    <meta name="description" content="Is your website loading slow? Learn the top 5 reasons why websites lag and how to fix them immediately to boost Google ranking and sales. Expert guide by Shahroz.">
+    <meta name="keywords" content="Website Speed Optimization, Fix Slow Website, PageSpeed Insights, Core Web Vitals, WordPress Speed, Web Developer, Shahroz Akram">
+    <meta name="author" content="Shahroz Akram">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://shahrozakram.github.io/portfolio/article-speed.html">
+    <meta property="og:title" content="5 Reasons Your Website is Slow (And How to Fix It)">
+    <meta property="og:description" content="Speed kills sales! Discover why your site is slow and how to make it fly in 5 easy steps.">
+    <meta property="og:image" content="https://shahrozakram.github.io/portfolio/images/Speed.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shahrozakram.github.io/portfolio/article-speed.html">
+    <meta property="twitter:title" content="5 Reasons Your Website is Slow & How to Fix It">
+    <meta property="twitter:description" content="Speed kills sales! Discover why your site is slow and how to make it fly in 5 easy steps.">
+    <meta property="twitter:image" content="https://shahrozakram.github.io/portfolio/images/Speed.jpg">
+
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="images/favicon.png" type="image/png">
-    
+    <link rel="icon" href="images/favicon.png" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="images/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "5 Reasons Your Website is Slow (And How to Fix It)",
+      "image": "https://shahrozakram.github.io/portfolio/images/Speed.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Shahroz Akram"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Shahroz Akram"
+      },
+      "datePublished": "2025-11-05",
+      "description": "A comprehensive guide on diagnosing and fixing slow website performance issues like large images and bad hosting."
+    }
+    </script>
 </head>
 <body class="light-mode">
 
@@ -17,7 +52,7 @@
     <div id="preloader">
         <div class="loader-content">
             <div class="spinner"></div>
-            <p>Loading My Universe...</p>
+            <p>Loading Insights...</p>
         </div>
     </div>
 
@@ -63,7 +98,7 @@
                 <p class="lead">Nobody likes a slow website. If your site takes more than 3 seconds to open, your visitors will leave. Speed is very important for Google ranking and for your business sales.</p>
 
                 <div class="article-image" style="margin: 40px 0;">
-                    <img src="images/Speed.jpg" alt="Website Speed">
+                    <img src="images/Speed.jpg" alt="Website Speed Optimization and Performance">
                 </div>
 
                 <p>Here are the 5 biggest mistakes that make websites slow, and how you can fix them easily.</p>
@@ -125,18 +160,19 @@
             <div class="footer-col">
                 <h3>My Services</h3>
                 <ul>
-                    <li><a href="#">Web Design</a></li>
-                    <li><a href="#">Development</a></li>
-                    <li><a href="#">SEO Marketing</a></li>
-                    <li><a href="#">E-Commerce</a></li>
-                    <li><a href="#">Graphic Design</a></li>
+                    <li><a href="index.html#services">Web Design</a></li>
+                    <li><a href="index.html#services">Development</a></li>
+                    <li><a href="index.html#services">SEO Marketing</a></li>
+                    <li><a href="index.html#services">E-Commerce</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Newsletter</h3>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email">
-                    <button type="button"><i class="fa-solid fa-paper-plane"></i></button>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" onclick="alert('Thanks for subscribing! We will update you soon.')">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
                 </form>
             </div>
         </div>
