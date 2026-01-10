@@ -2,31 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://shahrozakram.github.io/portfolio/</loc>
+    <loc>https://shahrozakram.github.io</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://shahrozakram.github.io/portfolio/blog.html</loc>
+    <loc>https://shahrozakram.github.io/blog.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://shahrozakram.github.io/portfolio/article-seo.html</loc>
+    <loc>https://shahrozakram.github.io/article-seo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://shahrozakram.github.io/portfolio/article-speed.html</loc>
+    <loc>https://shahrozakram.github.io/article-speed.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://shahrozakram.github.io/portfolio/article-tech.html</loc>
+    <loc>https://shahrozakram.github.io/article-tech.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
